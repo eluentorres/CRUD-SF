@@ -1,21 +1,22 @@
 import express from "express";
 import * as controller from "../controllers/videogames.controller.js";
+import { validateVideogame } from "../middlewares/validateVideogame.middleware.js";
 
 const router = express.Router();
 
-// READ - todos
+// READ - Obtener todos los videojuegos
 router.get("/", controller.getVideogames);
 
-// READ - obtener uno por ID
+// READ - Obtener un videojuego por ID
 router.get("/:id", controller.getVideogame);
 
-// CREATE
-router.post("/", controller.createVideogame);
+// CREATE - Crear un videojuego
+router.post("/", validateVideogame, controller.createVideogame);
 
-// UPDATE 
+// UPDATE - Actualizar un videojuego por ID
 router.put("/:id", controller.updateVideogame);
 
-// DELETE 
+// DELETE - Eliminar un videojuego por ID
 router.delete("/:id", controller.deleteVideogame);
 
 export default router;
